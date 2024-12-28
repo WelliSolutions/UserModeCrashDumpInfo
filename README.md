@@ -31,7 +31,13 @@ Bulk processing:
 for %f in (*.dmp) do "UserModeCrashDumpInfo.exe" "%f" /exe /exception /fileversion /time /rename
 ```
 
+The exception will be printed as an 8 digit hex number with leading 0x (e.g. `0x00000000`).
+
+The time will be printed as an ISO like yyyy-MM-dd HH-mm-ss (not using colons, since those are not valid in file names).
+
 ## Example
+
+### Printing basic information about the crash
 
 ```none
 C:\...>UserModeCrashDumpInfo.exe 757120f3-b864-43f1-a4b0-959500f9e3d9.dmp /exception /exe /fileversion /productversion /time
@@ -43,3 +49,13 @@ soffice.bin
 ```
 
 So this was an Access Violation in Libre Office 7.0.5.2 from 2022-03-24.
+
+### Renaming the file
+
+```none
+C:\...>UserModeCrashDumpInfo.exe 757120f3-b864-43f1-a4b0-959500f9e3d9.dmp /exe /exception /time /rename
+soffice.bin 0xc0000005 2022-03-24 18-55-09
+
+C:\...>dir /b *.dmp
+soffice.bin 0xc0000005 2022-03-24 18-55-09.dmp
+```
